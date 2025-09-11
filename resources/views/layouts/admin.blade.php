@@ -17,7 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-gray-50">
         @include('layouts.includes.admin.navigation')
         @include('layouts.includes.admin.sidebar')
         
@@ -33,5 +33,6 @@
         @stack('modals')
 
         @livewireScripts
+        
     </body>
 </html>
