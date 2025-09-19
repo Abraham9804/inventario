@@ -1,3 +1,6 @@
+@props([
+    'breadcrumbs' => []
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -24,9 +27,17 @@
 
         <div class="p-4 sm:ml-64">
             <!-- Content -->
-            <div class="mt-14">
-                {{ $slot }}
+            <div class="mt-14 flex items-center justify-between">
+                @include('layouts.includes.admin.breadcrumb')
+
+                @isset($action)
+                    <div class="ml-auto">
+                        {{ $action }}
+                    </div>
+                @endisset
             </div>
+            
+            {{ $slot }}
         </div>
 
 
