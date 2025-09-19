@@ -63,7 +63,7 @@
                                     </ul>
                                 </li>
                                 @else
-                                    <a href="{{route($link['route'])}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{$link['active']?'bg-gray-500':''}}">
+                                    <a href="{{route($link['route'])}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{$link['active']?'bg-gray-200':''}}">
                                         <span class="w-6 h-6 text-gray-300 ">
                                             <i class="{{$link['icon']}}"></i>
                                             </span>

@@ -14,4 +14,7 @@ title="Dashboard">
         </a>
     </x-slot>
     <h1 class="text-2xl font-bold">Dashboard</h1>
+    <x-wire-button label="Default" >
+        test
+    </x-wire-button>
 </x-admin-layout>
