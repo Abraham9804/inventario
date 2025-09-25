@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model
 {
-    //
+    protected $fillable = [
+        'serie',
+        'correlative',
+        'date',
+        'total',
+        'observation',
+        'origin_warehouse_id',
+        'destination_warehouse_id',
+    ];
 }
