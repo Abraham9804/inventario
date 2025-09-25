@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class quotes extends Model
+class Quote extends Model
 {
     protected $fillable = [
         'vourcher_type',
@@ -15,4 +15,6 @@ class quotes extends Model
         'total',
         'observation',
     ];
+
+    
 }
