@@ -17,4 +17,11 @@ class Purchase extends Model
         'total',
         'observation',
     ];
+
+    public function products()
+    {
+        return $this->morphToMany(Product::class, 'productable')
+                    ->withPivot('quantity', 'price', 'subtotal')
+                    ->withTimestamps();
+    }
 }

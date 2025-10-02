@@ -15,4 +15,11 @@ class Transfer extends Model
         'origin_warehouse_id',
         'destination_warehouse_id',
     ];
+
+    public function products()
+    {
+        return $this->morphToMany(Product::class, 'productable')
+                    ->withPivot('quantity', 'price', 'subtotal')
+                    ->withTimestamps();
+    }
 }

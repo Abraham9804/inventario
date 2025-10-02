@@ -16,4 +16,11 @@ class Movement extends Model
         'total',
         'observation',
     ];
+
+    public function products()
+    {
+        return $this->morphToMany(Product::class, 'productable')
+                    ->withPivot('qty', 'price', 'subtotal')
+                    ->withTimestamps();
+    }
 }

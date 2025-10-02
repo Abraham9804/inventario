@@ -18,4 +18,9 @@ class Suplier extends Model
         return $this->hasMany(PurchaseOrder::class);
     }
 
+    public function identity()
+    {
+        return $this->belongsTo(Identity::class);
+    }
+
 }
