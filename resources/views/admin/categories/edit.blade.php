@@ -17,5 +17,5 @@ title="Dashboard">
             Action
         </a>
     </x-slot>
-    <h1 class="text-2xl font-bold">Editar categoria</h1>
+    <h1 class="text-2xl font-bold">Editar categoria {{ $category->name}}</h1>
 </x-admin-layout>

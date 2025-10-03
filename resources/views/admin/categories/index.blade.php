@@ -14,4 +14,5 @@ title="Dashboard">
         </a>
     </x-slot>
     <h1 class="text-2xl font-bold">INDEX</h1>
+    @livewire('Admin.Datatables.CategoryTable')
 </x-admin-layout>

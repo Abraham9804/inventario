@@ -27,5 +27,20 @@ class CategorySeeder extends Seeder
             'name' => 'Hogar',
             'description' => 'Articulos para el hogar y decoracion',
         ]);
+
+        Category::create([
+            'name' => 'Deportes',
+            'description' => 'Equipamiento y ropa deportiva',
+        ]);
+
+        Category::create([
+            'name' => 'Libros',
+            'description' => 'Libros y material de lectura',
+        ]);
+
+        Category::create([
+            'name' => 'Juguetes',
+            'description' => 'Juguetes y juegos para niños',
+        ]);
     }
 }
