@@ -7,6 +7,12 @@
             'active' => request()->routeIs('admin.dashboard')
         ],
         [
+            'name' => 'Categorías',
+            'icon' => 'fa-solid fa-list',
+            'route' => 'admin.categories.index',
+            'active' => request()->routeIs('admin.categories.*')
+        ],
+        [
             'header' => 'Administrar ventas'
         ],
         [

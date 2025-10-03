@@ -22,4 +22,14 @@ class Transfer extends Model
                     ->withPivot('quantity', 'price', 'subtotal')
                     ->withTimestamps();
     }
+
+    public function originWarehouse()
+    {
+        return $this->belongsTo(Warehouse::class, 'origin_warehouse_id');
+    }
+
+    public function destinationWarehouse()
+    {
+        return $this->belongsTo(Warehouse::class, 'destination_warehouse_id');
+    }
 }
