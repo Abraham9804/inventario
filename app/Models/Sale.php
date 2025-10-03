@@ -24,4 +24,14 @@ class Sale extends Model
                     ->withPivot('quantity', 'price', 'subtotal')
                     ->withTimestamps();
     }
+
+    public function quote()
+    {
+        return $this->belongsTo(Quote::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

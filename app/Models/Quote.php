@@ -16,5 +16,20 @@ class Quote extends Model
         'observation',
     ];
 
-    
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function sale()
+    {
+        return $this->hasOne(Sale::class);
+    }
+
+    public function products()
+    {
+        return $this->morphToMany(Product::class, 'productable')
+                    ->withPivot('quantity', 'price', 'subtotal')
+                    ->withTimestamps();
+    }
 }

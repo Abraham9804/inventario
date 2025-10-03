@@ -15,4 +15,9 @@ class PurchaseOrder extends Model
         'total',
         'observation',
     ];
+
+    public function suplier()
+    {
+        return $this->belongsTo(Suplier::class);
+    }
 }

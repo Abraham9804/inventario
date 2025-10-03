@@ -24,4 +24,9 @@ class Purchase extends Model
                     ->withPivot('quantity', 'price', 'subtotal')
                     ->withTimestamps();
     }
+
+    public function suplier()
+    {
+        return $this->belongsTo(Suplier::class);
+    }
 }

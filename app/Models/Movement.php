@@ -20,7 +20,7 @@ class Movement extends Model
     public function products()
     {
         return $this->morphToMany(Product::class, 'productable')
-                    ->withPivot('qty', 'price', 'subtotal')
+                    ->withPivot('quantity', 'price', 'subtotal')
                     ->withTimestamps();
     }
 }

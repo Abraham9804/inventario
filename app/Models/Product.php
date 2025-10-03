@@ -43,4 +43,25 @@ class Product extends Model
                     ->withTimestamps();
    }
 
+   public function quotes()
+   {
+          return $this->morphedByMany(Quote::class, 'productable')
+                      ->withPivot('quantity', 'price', 'subtotal')
+                      ->withTimestamps();
+   }
+
+   public function category()
+   {
+     return $this->belongsTo(Category::class);
+   }
+
+   public function inventaries()
+   {
+        return $this->hasMany(Inventory::class);
+   }
+
+   public function images()
+   {
+     return $this->morphMany(Image::class, 'imageable');
+   }
 }
