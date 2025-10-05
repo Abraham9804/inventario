@@ -19,10 +19,13 @@ class CategoryTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
+                ->searchable()
                 ->sortable(),
             Column::make("Nombre", "name")
+                ->searchable()
                 ->sortable(),
             Column::make("Descripción", "description")
+                ->searchable()
                 ->sortable(),
             Column::make('Acciones')
                 ->label(function($row){
