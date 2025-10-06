@@ -21,6 +21,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @stack('css')
     </head>
     <body class="font-sans antialiased bg-gray-50">
         @include('layouts.includes.admin.navigation')
@@ -54,5 +55,7 @@
                 })
             </script>
         @endif
+
+        @stack('js')
     </body>
 </html>

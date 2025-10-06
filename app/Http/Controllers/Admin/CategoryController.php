@@ -39,9 +39,12 @@ class CategoryController extends Controller
         session()->flash('swal',[
             'icon'=>'success',
             'title'=>'Categoria creada',
-            'text'=>'La categoria se ha creado exitosamente'
+            'text'=>'La categoria se ha creado exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1000
         ]);
-        return redirect()->route('admin.categories.edit',$newCategory)->with('success', 'Categoria creada exitosamente.');
+
+        return redirect()->route('admin.categories.index',$newCategory)->with('success', 'Categoria creada exitosamente.');
     }
 
 
@@ -67,6 +70,31 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+       
+
+        if($category->products()->exists()){
+            session()->flash('swal',[
+                'icon'=>'error',
+                'title'=>'Error al eliminar la categoria',
+                'text'=>'La categoria tiene productos asociados',
+                'showConfirmButton' => true,
+                'confirmButtonColor' => '#3085d6',
+                'confirmButtonText' => 'Aceptar'
+            ]);
+
+            return redirect()->route('admin.categories.index');
+        }
+
+         $category->delete();
+
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Categoria eliminada',
+            'text'=>'La categoria se ha eliminado exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1500
+        ]);
+
+        return redirect()->route('admin.categories.index');
     }
 }

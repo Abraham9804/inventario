@@ -14,4 +14,31 @@
     </x-slot>
     <h1 class="text-2xl font-bold mb-6">Lista de categorias</h1>
     @livewire('Admin.Datatables.CategoryTable')
+
+    @push('js')
+        <script>
+            const forms = document.querySelectorAll('.delete-form')
+
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e){
+                    e.preventDefault()
+                    
+                    Swal.fire({
+                        title: "Desea eliminar la categoria?",
+                        text: "Esta acción no es reversible!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Eliminar",
+                        cancelButtonText: "Cancelar"
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit()
+                        }
+                    });
+                })
+            })
+        </script>
+    @endpush
 </x-admin-layout>

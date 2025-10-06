@@ -3,7 +3,7 @@
         Editar
     </x-wire-button>
 
-    <form action="{{route('admin.categories.destroy', $category)}}" method="POST" >
+    <form action="{{route('admin.categories.destroy', $category)}}" method="POST" class="delete-form">
         @csrf 
         @method('DELETE')
         <x-wire-button type="submit" red>
