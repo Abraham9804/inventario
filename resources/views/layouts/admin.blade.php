@@ -46,16 +46,13 @@
         @stack('modals')
 
         @livewireScripts
-        <script>
-            document.addEventListener('DOMContentLoaded',function(){
-                Swal.fire({
-                    title: "Good job!",
-                    text: "You clicked the button!",
-                    icon: "success"
-                });
-            })
-            
-        </script>
-        
+
+        @if(session('swal'))
+            <script>
+                document.addEventListener('DOMContentLoaded',function(){
+                    Swal.fire(@json(session('swal')));
+                })
+            </script>
+        @endif
     </body>
 </html>

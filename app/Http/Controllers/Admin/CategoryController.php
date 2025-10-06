@@ -36,6 +36,11 @@ class CategoryController extends Controller
 
         $newCategory =Category::create($validated);
 
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Categoria creada',
+            'text'=>'La categoria se ha creado exitosamente'
+        ]);
         return redirect()->route('admin.categories.edit',$newCategory)->with('success', 'Categoria creada exitosamente.');
     }
 
