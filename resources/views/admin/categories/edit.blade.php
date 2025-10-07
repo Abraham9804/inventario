@@ -1,4 +1,4 @@
-<x-admin-layout :breadcrumbs="[
+<x-admin-layout title="Editar categoria" :breadcrumbs="[
     [
         'name' => 'Dashboard',
         'href' => route('admin.dashboard')

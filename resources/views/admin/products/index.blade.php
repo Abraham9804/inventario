@@ -1,4 +1,4 @@
-<x-admin-layout :breadcrumbs="[
+<x-admin-layout title="Productos" :breadcrumbs="[
     [
         'name' => 'Dashboard',
         'href' => route('admin.dashboard')
@@ -13,5 +13,5 @@
         Agregar Producto
     </a>
 </x-slot>
-
+    @livewire('Admin.Datatables.ProductTable')
 </x-admin-layout>
