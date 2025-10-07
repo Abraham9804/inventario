@@ -13,6 +13,12 @@
             'active' => request()->routeIs('admin.categories.*')
         ],
         [
+            'name' => 'Productos',
+            'icon' => 'fa-solid fa-box',
+            'route' => 'admin.products.index',
+            'active' => request()->routeIs('admin.products.*')
+        ],
+        [
             'header' => 'Administrar ventas'
         ],
         [
