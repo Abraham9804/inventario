@@ -31,8 +31,25 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:products,name',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        Product::create($validated);
+
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Producto creado',
+            'text'=>'El producto se ha creado exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1000
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -47,8 +64,9 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
-    {
-        //
+    {   
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product','categories'));
     }
 
     /**

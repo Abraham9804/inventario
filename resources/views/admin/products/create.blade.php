@@ -1,3 +1,13 @@
+@php 
+    $names = [];
+
+    foreach ($categories as $category) {
+        $names[] = $category->name;
+    }
+
+   
+
+@endphp
 <x-admin-layout title="Crear producto" :breadcrumbs="[
     [
         'name' => 'Dashboard',
@@ -13,19 +23,23 @@
             Lista de productos
         </a>
     </x-slot>
-
+   
     <x-wire-card>
-        <form method="POST" action="{{ route('admin.products.store')}}">
+        <form method="POST" action="{{ route('admin.products.store')}}" class="space-y-4">
             @csrf
             <x-wire-input name="name" label="Nombre" placeholder="Nombre del producto" value="{{old('name')}}"/>
             <x-wire-textarea name="description" label="Descripción" placeholder="Descripción del producto">{{old('description')}}</x-wire-textarea>
             <x-wire-input name="price" label="Precio" placeholder="0.00" value="{{old('price')}}" type="number" step="0.01" min="0"/>
-            <x-wire-native-select name="category_id" label="Categoría">
-                <option value="" disabled selected>Seleccione una categoría</option>
+            <x-wire-select label="Categoria" placeholder="Selecciona la categoria" name="category_id">
                 @foreach($categories as $category)
-                    <option value="{{$category->id}}" selected="{{ old('category_id') == $category->id}}">{{$category->name}}</option>
+                    <x-wire-select.option value="{{$category->id}}" selected="{{ old('category_id') == $category->id}}" label="{{$category->name}}"/>
                 @endforeach
-            </x-wire-native-select>
+            </x-wire-select>
+            <div class="flex justify-end">
+                <x-button type="submit" primary class="float-right">
+                Crear producto
+                </x-button>
+            </div>
         </form>
     </x-wire-card>
 
