@@ -66,6 +66,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {   
         $categories = Category::all();
+         $product->load('category');
         return view('admin.products.edit', compact('product','categories'));
     }
 
@@ -74,7 +75,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:products,name,'.$product->id,
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product->update($validated);
+
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Producto actualizado',
+            'text'=>'El producto se ha actualizado exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1000
+        ]);
+
+        return redirect()->back();
     }
 
     /**

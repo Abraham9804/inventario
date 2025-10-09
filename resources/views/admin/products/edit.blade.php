@@ -19,18 +19,46 @@
         </a>
     </x-slot>
 
+
     <x-wire-card>
-        <form method="POST" action="{{ route('admin.products.update', $product)}}">
+        <form method="POST" action="{{ route('admin.products.update', $product)}}" class="space-y-4">
             @csrf
+            @method('PUT')
             <x-wire-input name="name" label="Nombre" placeholder="Nombre del producto" value="{{old('name', $product->name)}}"/>
             <x-wire-textarea name="description" label="Descripción" placeholder="Descripción del producto">{{old('description', $product->description)}}</x-wire-textarea>
             <x-wire-input name="price" label="Precio" placeholder="0.00" value="{{old('price', $product->price)}}" type="number" step="0.01" min="0"/>
-            <x-wire-native-select name="category_id" label="Categoría">
-                <option value="" disabled selected>Seleccione una categoría</option>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}" selected="{{ old('category_id') == $category->id}}">{{$category->name}}</option>
-                @endforeach
-            </x-wire-native-select>
+            <div class="space-y-1">
+                <label for="category_id" class="block text-sm font-medium text-gray-700">Categoria</label>
+                <select 
+                    id="category_id"
+                    name="category_id"
+                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                >
+                    <option value="">Selecciona la categoria</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="flex justify-end">
+                <x-button type="submit" primary class="float-right">
+                    Editar
+                </x-button>
+            </div>
         </form>
     </x-wire-card>
 </x-admin-layout>
