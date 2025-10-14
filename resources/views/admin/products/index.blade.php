@@ -14,4 +14,29 @@
     </a>
 </x-slot>
     @livewire('Admin.Datatables.ProductTable')
+
+    @push('js')
+        <script>
+            const products = document.querySelectorAll('.delete-form')
+            products.forEach(product => {
+                product.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡No podrás revertir esto!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminarlo!',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    })
+                })
+            })
+        </script>
+    @endpush
 </x-admin-layout>

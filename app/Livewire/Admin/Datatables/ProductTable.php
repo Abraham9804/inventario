@@ -21,13 +21,17 @@ class ProductTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Nombre", "name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Descripción", "description")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Precio", "price")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Categoria", "category.name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('Acciones')
                 ->label(function($row){
                     return view('admin.products.actions', ['product' => $row]);

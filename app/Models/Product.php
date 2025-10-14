@@ -26,6 +26,13 @@ class Product extends Model
                          ->withTimestamps();
      }
 
+     public function purchaseOrders()
+     {
+          return $this->morphedByMany(PurchaseOrder::class, 'productable')
+                         ->withPivot('qty', 'price', 'subtotal')
+                         ->withTimestamps();
+     }
+
      public function sales()
      {
           return $this->morphedByMany(Sale::class, 'productable')

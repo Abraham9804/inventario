@@ -100,6 +100,37 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->inventaries()->exists()){
+            session()->flash('swal',[
+                'icon'=>'error',
+                'title'=>'No se puede eliminar',
+                'text'=>'El producto tiene inventario asociado',
+                'showConfirmButton' => true,
+            ]);
+            return redirect()->back();
+        }
+
+        if($product->quotes()->exists() || $product->purchaseOrders()->exists())
+        {
+            session()->flash('swal',[
+                'icon'=>'error',
+                'title'=>'No se puede eliminar',
+                'text'=>'El producto tiene registros asociados',
+                'showConfirmButton' => true,
+            ]);
+            return redirect()->back();
+        }
+
+        $product->delete();
+        
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Producto eliminado',
+            'text'=>'El producto se ha eliminado exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1000
+        ]);
+
+        return redirect()->route('admin.products.index');
     }
 }
