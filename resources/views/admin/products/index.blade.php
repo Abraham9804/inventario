@@ -17,26 +17,28 @@
 
     @push('js')
         <script>
-            const products = document.querySelectorAll('.delete-form')
-            products.forEach(product => {
-                product.addEventListener('submit', function(e){
-                    e.preventDefault();
-                    Swal.fire({
-                        title: '¿Estás seguro?',
-                        text: "¡No podrás revertir esto!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Sí, eliminarlo!',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.submit();
-                        }
-                    })
+            
+                document.addEventListener('submit', function(e){
+                    if(e.target && e.target.classList.contains('delete-form')){
+                        console.log(e.target)
+                        e.preventDefault();
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: "¡No podrás revertir esto!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, eliminarlo!',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                e.target.submit();
+                            }
+                        })
+                    }
                 })
-            })
+            
         </script>
     @endpush
 </x-admin-layout>

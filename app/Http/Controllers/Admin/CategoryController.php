@@ -85,7 +85,7 @@ class CategoryController extends Controller
             return redirect()->route('admin.categories.index');
         }
 
-         $category->delete();
+        $category->delete();
 
         session()->flash('swal',[
             'icon'=>'success',
