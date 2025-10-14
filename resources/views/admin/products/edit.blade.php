@@ -61,4 +61,37 @@
             </div>
         </form>
     </x-wire-card>
+
+    <x-wire-card class="mt-6">
+        <h1>Subir imagen</h1>
+        <form action="/target" class="dropzone" id="my-dropzone">
+       </form>
+    </x-wire-card>
+
+    @push('js')
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const dropzoneElement = document.getElementById("my-dropzone");
+
+                if (dropzoneElement) {
+                    new Dropzone(dropzoneElement, {
+                        url: dropzoneElement.action,
+                        paramName: "file",
+                        maxFilesize: 2,
+                        acceptedFiles: ".jpg,.jpeg,.png",
+                        headers: {
+                            "X-CSRF-TOKEN": document
+                                .querySelector('meta[name="csrf-token"]')
+                                .getAttribute("content"),
+                        },
+                        dictDefaultMessage:
+                            "Arrastra tus archivos aquí o haz clic para subir",
+                        success: (file, response) => {
+                            console.log("Archivo subido:", response.path);
+                        },
+                    });
+                }
+            });
+        </script>
+    @endpush
 </x-admin-layout>
