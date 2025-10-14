@@ -17,28 +17,28 @@
 
     @push('js')
         <script>
-            const forms = document.querySelectorAll('.delete-form')
-
-            forms.forEach(form => {
-                form.addEventListener('submit', function(e){
-                    e.preventDefault()
-                    
-                    Swal.fire({
-                        title: "Desea eliminar la categoria?",
-                        text: "Esta acción no es reversible!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Eliminar",
-                        cancelButtonText: "Cancelar"
+                document.addEventListener('submit', function(e){
+                    if(e.target && e.target.classList.contains('delete-form')){
+                        e.preventDefault()
+                        Swal.fire({
+                            title: "Desea eliminar la categoria?",
+                            text: "Esta acción no es reversible!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Eliminar",
+                            cancelButtonText: "Cancelar"
                         }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit()
-                        }
-                    });
+                            if (result.isConfirmed) {
+                                e.target.submit()
+                            }
+                        });
+                    }
+                    
+                    
+                    
                 })
-            })
         </script>
     @endpush
 </x-admin-layout>
