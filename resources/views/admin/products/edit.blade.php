@@ -77,7 +77,12 @@
             document.addEventListener("DOMContentLoaded", () => {
                 let myDropzone = new Dropzone("#my-dropzone", { 
                     paramName: "file",
-                    
+                     init: function() {
+            this.on("success", function(file, response) {
+                // Recarga la página para que se muestre el SweetAlert
+                location.reload();
+            });
+        }
                 });
 
                 /*const dropzoneElement = document.getElementById("my-dropzone");

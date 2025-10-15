@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class ProductController extends Controller
 {
@@ -138,6 +139,19 @@ class ProductController extends Controller
     public function dropzone(Request $request, Product $product)
     {
         $path = $request->file('file')->store('/images/products', 'public');
-        return response()->json(['path' => $path], 200);
+
+        $product->images()->create([
+            'path' => $path,
+            'size' => $request->file('file')->getSize(),
+        ]);
+        
+        session()->flash('swal',[
+            'icon'=>'success',
+            'title'=>'Imagen subida',
+            'text'=>'La imagen se ha subido exitosamente',
+            'showConfirmButton' => false,
+            'timer'=>1000
+        ]);
+
     }
 }
