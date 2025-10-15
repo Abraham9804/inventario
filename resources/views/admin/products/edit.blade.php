@@ -13,6 +13,13 @@
 
 ]">
 
+@push('css')
+    <style>
+        .dz-message{
+            display: none;
+        }
+    </style>
+@endpush 
     <x-slot name="action">
         <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
             Lista de productos
@@ -63,12 +70,11 @@
     </x-wire-card>
 
     <x-wire-card class="mt-6">
-        <h1>Subir imagen</h1>
         <form action="{{ route('admin.products.dropzone', $product) }}" method="POST" 
-        class="dropzone flex flex-col items-center justify-around" id="my-dropzone">
+            class="dropzone flex flex-col items-center justify-around" id="my-dropzone">
             @csrf
             <i class="fa-solid fa-cloud-arrow-up fa-6x"></i>
-            <span class="text-gray-600">Suelta tus archivos aquí para subirlos</span>
+            <span class="text-gray-600 mt-6">Suelta tus archivos aquí para subirlos</span>
        </form>
     </x-wire-card>
 
@@ -77,33 +83,13 @@
             document.addEventListener("DOMContentLoaded", () => {
                 let myDropzone = new Dropzone("#my-dropzone", { 
                     paramName: "file",
+                    
                      init: function() {
-            this.on("success", function(file, response) {
-                // Recarga la página para que se muestre el SweetAlert
-                location.reload();
-            });
-        }
+                        this.on("success", function(file, response) {
+                            location.reload();
+                        });
+                    }
                 });
-
-                /*const dropzoneElement = document.getElementById("my-dropzone");
-
-                if (dropzoneElement) {
-                    new Dropzone(dropzoneElement, {
-                        url: dropzoneElement.action,
-                        paramName: "file",
-                        maxFilesize: 2,
-                        acceptedFiles: ".jpg,.jpeg,.png",
-                        headers: {
-                            "X-CSRF-TOKEN": document
-                                .querySelector('meta[name="csrf-token"]')
-                                .getAttribute("content"),
-                        },
-                        
-                        success: (file, response) => {
-                            console.log("Archivo subido:", response.path);
-                        },
-                    });
-                }*/
             });
         </script>
     @endpush
