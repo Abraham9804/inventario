@@ -10,3 +10,4 @@ Route::get('/',function(){
 
 Route::resource('categories', CategoryController::class)->except(['show']);
 Route::resource('products', ProductController::class)->except(['show']);
+Route::post('products/{product}/dropzone', [ProductController::class, 'dropzone'])->name('products.dropzone');

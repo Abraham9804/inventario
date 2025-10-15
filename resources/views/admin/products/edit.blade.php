@@ -64,14 +64,23 @@
 
     <x-wire-card class="mt-6">
         <h1>Subir imagen</h1>
-        <form action="/target" class="dropzone" id="my-dropzone">
+        <form action="{{ route('admin.products.dropzone', $product) }}" method="POST" 
+        class="dropzone flex flex-col items-center justify-around" id="my-dropzone">
+            @csrf
+            <i class="fa-solid fa-cloud-arrow-up fa-6x"></i>
+            <span class="text-gray-600">Suelta tus archivos aquí para subirlos</span>
        </form>
     </x-wire-card>
 
     @push('js')
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const dropzoneElement = document.getElementById("my-dropzone");
+                let myDropzone = new Dropzone("#my-dropzone", { 
+                    paramName: "file",
+                    
+                });
+
+                /*const dropzoneElement = document.getElementById("my-dropzone");
 
                 if (dropzoneElement) {
                     new Dropzone(dropzoneElement, {
@@ -84,13 +93,12 @@
                                 .querySelector('meta[name="csrf-token"]')
                                 .getAttribute("content"),
                         },
-                        dictDefaultMessage:
-                            "Arrastra tus archivos aquí o haz clic para subir",
+                        
                         success: (file, response) => {
                             console.log("Archivo subido:", response.path);
                         },
                     });
-                }
+                }*/
             });
         </script>
     @endpush
