@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Product extends Model
@@ -18,6 +20,15 @@ class Product extends Model
           'price',
           'category_id',
      ];
+
+
+     //Accesors
+     protected function image(): Attribute 
+     {
+          return Attribute::make(
+               get: fn() => $this->images()->count() ? Storage::url($this->images->first()->path) : Storage::url('images/no_image.jpg')
+          );
+     }
 
      public function purchases()
      {
